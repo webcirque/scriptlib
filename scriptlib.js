@@ -1,6 +1,6 @@
 var para=document.createElement("script");
 if (_ver == "newest") {
- para.src="https://mwashfds.github.io/SciptLib/0.3/scriptlib.js";
+ para.src="https://mwashfds.github.io/ScriptLib/0.3/scriptlib.js";
  console.log("Fetching newest version of ScriptLib...");
 }
 else {
