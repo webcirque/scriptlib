@@ -77,10 +77,10 @@ else {
 }
 
 //Window methods
-_.w = function () {
-	console.error(_("msg.notAFunction").replace("$1","_.w"));
+_.tab = function () {
+	console.error(_("msg.notAFunction").replace("$1","_.tab"));
 }
-_.w.refreshTab = function () {
+_.tab.reload = function () {
 	console.log(_("msg.tabIsReloaded").replace("$1", _("var.pathname")));
 	window.location.href = window.location.href;
 }
