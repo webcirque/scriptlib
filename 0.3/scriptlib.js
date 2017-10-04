@@ -5,7 +5,7 @@ function _(name) {
 	while (donum < _.topVar.length) {
 		if (_.topVar[donum][0] == name) {
 			res = _.topVar[donum][1];
-			if (name !== "msg.foundtv") {console.log(_("msg.foundtv").replace("$1",name).replace("$2",donum));}
+			}
 		}
 		donum ++;
 	}
@@ -25,20 +25,19 @@ _.set = function (name, content) {
 			if (_.topVar[donum][0] == name) {
 				res = _.topVar[donum][1];
 				ki = donum;
-				console.log(_("msg.foundtv").replace("$1", name).replace("$2", donum));
 			}
 			donum ++;
 		}
-		if (res == null) {
+		if (res == null && (content !== undefined && content !== null)) {
 			_.topVar[_.topVar.length] = [name,content];
-			console.log("Created variable named [$1] under index [$2].".replace("$1", name).replace("$2", _.topVar.length-1));
+			console.log(_("msg.createdVar").replace("$1", name).replace("$2", _.topVar.length-1));
 		}
 		else {
 			if (content !== null) {
 				_.topVar[ki][1] = content;
 				console.log("Rewrited variable named [$1] under index [$2].".replace("$1", name).replace("$2", ki));
 			}
-			else {
+			else if (res !== null) {
 				donum = 0;
 				relist = [];
 				while (donum < _.topVar.length) {
@@ -50,6 +49,9 @@ _.set = function (name, content) {
 				}
 				_.topVar = relist;
 			}
+			else {
+				console.error(_("msg.cannotCreateNull"));
+			}
 		}
 		ki = null
 		donum = null;
@@ -58,18 +60,16 @@ _.set = function (name, content) {
 }
 
 //Multi-language support
-if (_lang == "en_US") {
-	_.set("msg.foundtv","Found variable named [$1] under index [$2].");
-	_.set("msg.novar","No variable is named $1.");
-}
-else if (_lang == "zh_CN") {
-}
+_.set("msg.foundtv","Found variable named [$1] under index [$2].");
+_.set("msg.novar","No variable is named $1.");
+_.set("msg.notAFunction","$1 is not a function.");
+_.set("msg.createdVar","Created variable named [$1] under index [$2].");
 
 //Default variables
 
 //Window methods
 _.w = function () {
-	console.error("$1 is not a function".replace("$1","_.w"));
+	console.error(_("msg.notAFunction").replace("$1","_.w"));
 }
 _.w.refreshTab = function () {
 	console.log("Current tab [$1] has been refreshed.".replace("$1", window.location.href));
