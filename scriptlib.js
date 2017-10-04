@@ -8,6 +8,5 @@ else {
  console.log("Fetching ScriptLib of version " + _ver + " ...");
 }
 if (para.src !== null) {
- var element=document.head;
- element.appendChild(para);
+ document.head.appendChild(para);
 }
