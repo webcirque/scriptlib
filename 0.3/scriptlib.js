@@ -5,7 +5,6 @@ function _(name) {
 	while (donum < _.topVar.length) {
 		if (_.topVar[donum][0] == name) {
 			res = _.topVar[donum][1];
-			}
 		}
 		donum ++;
 	}
