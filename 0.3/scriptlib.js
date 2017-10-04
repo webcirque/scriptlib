@@ -70,10 +70,10 @@ if (window.location.protocol == "file:" | window.location.protocol == "ftp:" | w
 	_.set("var.pathname",window.location.href);
 }
 else if (window.location.port == "") {
-	_.set("var.pathname",window.location.protocol + "//" + window.location.host);
+	_.set("var.pathname",window.location.protocol + "//" + window.location.host + "/");
 }
 else {
-	_.set("var.pathname",window.location.protocol + "//" + window.location.host + ":" + window.location.port);
+	_.set("var.pathname",window.location.protocol + "//" + window.location.host + ":" + window.location.port + "/");
 }
 
 //Window methods
