@@ -13,8 +13,7 @@ function _(name) {
 		console.error(_("msg.novar").replace("$1",name));
 	}
 	donum = null;
-	return res;
-	res = null;
+	return(res);
 }
 _.topVar = [["_ver","0.3"]];
 _.set = function (name, content) {
