@@ -9,7 +9,7 @@ function _(name) {
 		donum ++;
 	}
 	if (res == null) {
-		console.error(_("msg.novar").replace("$1",name));
+		console.error("No variable is named $1.".replace("$1",name));
 	}
 	donum = null;
 	return(res);
@@ -26,9 +26,9 @@ _.set = function (name, content) {
 			}
 			donum ++;
 		}
-		if (res == null && (content !== undefined && content !== null)) {
+		if (res == null && (content !== undefined | content !== null)) {
 			_.topVar[_.topVar.length] = [name,content];
-			console.log(_("msg.createdVar").replace("$1", name).replace("$2", _.topVar.length-1));
+			console.log("Created variable named [$1] under index [$2].".replace("$1", name).replace("$2", _.topVar.length-1));
 		}
 		else {
 			if (content !== null) {
@@ -48,7 +48,7 @@ _.set = function (name, content) {
 				_.topVar = relist;
 			}
 			else {
-				console.error(_("msg.cannotCreateNull"));
+				console.error("Cannot create a null variable.");
 			}
 		}
 		ki = null
@@ -57,26 +57,37 @@ _.set = function (name, content) {
 	}
 }
 
-//Multi-language support
-_.set("msg.foundtv","Found variable named [$1] under index [$2].");
-_.set("msg.novar","No variable is named $1.");
+//Translation Area
 _.set("msg.notAFunction","$1 is not a function.");
-_.set("msg.createdVar","Created variable named [$1] under index [$2].");
+_.set("msg.tabIsReloaded","Current tab [$1] has been refreshed.");
+_.set("msg.noEnoughArgs","Argument was not presented enough in function $1() . You should present at least $2 argument(s).");
+_.set("msg.noSeptArgs","Argument was not seperated enough in function $1() . You should present at least $2 argument(s) with character [$3].");
+_.set("msg.tooManyArgs","Argument was presented more than required in function $1() . You should just present $2 argument(s).");
+_.set("msg.scriptlibLoaded","ScriptLib is initialized in version $1 .");
 
 //Default variables
+if (window.location.protocol == "file:" | window.location.protocol == "ftp:" | window.location.protocol == "ftps:" | window.location.protocol == "sftp:") {
+	_.set("var.pathname",window.location.href);
+}
+else if (window.location.port == "") {
+	_.set("var.pathname",window.location.protocol + "//" + window.location.host);
+}
+else {
+	_.set("var.pathname",window.location.protocol + "//" + window.location.host + ":" + window.location.port);
+}
 
 //Window methods
 _.w = function () {
 	console.error(_("msg.notAFunction").replace("$1","_.w"));
 }
 _.w.refreshTab = function () {
-	console.log("Current tab [$1] has been refreshed.".replace("$1", window.location.href));
+	console.log(_("msg.tabIsReloaded").replace("$1", _("var.pathname")));
 	window.location.href = window.location.href;
 }
 
 //Smart element selection method
 _.g = function (ele) {
-	wkm = ele.split(":");
+	if (ele !== undefined && ele !== "") {wkm = ele.split(":");} else {wkm = []}
 	if (wkm.length > 1) {
 		if (wkm[0] =="id") {
 		}
@@ -85,8 +96,11 @@ _.g = function (ele) {
 		//Auto relist tags
 	}
 	else {
+		console.error(_("msg.noEnoughArgs").replace("$1","_.g").replace("$2","1").replace("$3",":"));
 		res = null;
-		console.error("No argument was presented in function $1.".replace("$1","_.g()"))
 	}
 	return res;
 }
+
+//ScriptLib is loaded
+console.log(_("msg.scriptlibLoaded").replace("$1",_("_ver")));
