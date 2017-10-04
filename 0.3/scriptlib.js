@@ -26,7 +26,7 @@ _.set = function (name, content) {
 			}
 			donum ++;
 		}
-		if (res == null && (content !== undefined | content !== null)) {
+		if (res == null && (content !== undefined && content !== null)) {
 			_.topVar[_.topVar.length] = [name,content];
 			console.log("Created variable named [$1] under index [$2].".replace("$1", name).replace("$2", _.topVar.length-1));
 		}
