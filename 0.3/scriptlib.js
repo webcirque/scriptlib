@@ -64,6 +64,7 @@ _.set("msg.noEnoughArgs","Argument was not presented enough in function $1() . Y
 _.set("msg.noSeptArgs","Argument was not seperated enough in function $1() . You should present at least $2 argument(s) with character [$3].");
 _.set("msg.tooManyArgs","Argument was presented more than required in function $1() . You should just present $2 argument(s).");
 _.set("msg.scriptlibLoaded","ScriptLib is initialized in version $1 .");
+_.set("msg.noModeSelector","No mode selector in function $1($2). You should add a mode instructor.");
 
 //Default variables
 if (window.location.protocol == "file:" | window.location.protocol == "ftp:" | window.location.protocol == "ftps:" | window.location.protocol == "sftp:") {
@@ -85,19 +86,39 @@ _.tab.reload = function () {
 	window.location.href = window.location.href;
 }
 
-//Smart element selection method
-_.g = function (ele) {
-	if (ele !== undefined && ele !== "") {wkm = ele.split(":");} else {wkm = []}
-	if (wkm.length > 1) {
-		if (wkm[0] =="id") {
-		}
+//Quick method
+_.q = function () {
+	console.error(_("msg.notAFunction").replace("$1","_.q"));
+}
+_.q.replaceAll = function (str, ins, res) {
+	string = str;
+	while (string.search(ins) !== -1) {
+		string = string.replace(ins, res);
 	}
-	else if (wkm.length == 1) {
-		//Auto relist tags
+	return string;
+}
+_.q.stackAllElement = function () {
+}
+
+//Smart element selection method
+_.g = function (ele, src) {
+	if (src == undefined | src == null) {
+		src = document;
+	}
+	if (ele.search("id:") !== -1) {
+		res = src.getElementById(ele.replace("id:",""));
+	}
+	else if (ele.search("class:") !== -1) {
+		res = src.getElementsByClassName(ele.replace("class:",""));
+	}
+	else if (ele.search("name:") !== -1) {
+	}
+	else if (ele.search("tag:") !== -1) {
+	}
+	else if (ele.search("all:") !== -1) {
 	}
 	else {
-		console.error(_("msg.noEnoughArgs").replace("$1","_.g").replace("$2","1").replace("$3",":"));
-		res = null;
+		console.error(_("msg.noModeSelector").replace("$1","_,g").replace("$2",ele);
 	}
 	return res;
 }
