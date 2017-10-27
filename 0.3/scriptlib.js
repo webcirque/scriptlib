@@ -123,7 +123,7 @@ _.g = function (ele, src) {
 		console.error(_("msg.notSupported"));
 	}
 	else {
-		console.error(_("msg.noModeSelector").replace("$1","_,g").replace("$2",ele);
+		console.error(_("msg.noModeSelector").replace("$1","_,g").replace("$2",ele));
 	}
 	return res;
 }
