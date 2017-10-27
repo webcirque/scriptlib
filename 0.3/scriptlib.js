@@ -65,6 +65,7 @@ _.set("msg.noSeptArgs","Argument was not seperated enough in function $1() . You
 _.set("msg.tooManyArgs","Argument was presented more than required in function $1() . You should just present $2 argument(s).");
 _.set("msg.scriptlibLoaded","ScriptLib is initialized in version $1 .");
 _.set("msg.noModeSelector","No mode selector in function $1($2). You should add a mode instructor.");
+_.set("msg.notSupported","This feature is not supported.");
 
 //Default variables
 if (window.location.protocol == "file:" | window.location.protocol == "ftp:" | window.location.protocol == "ftps:" | window.location.protocol == "sftp:") {
@@ -102,6 +103,7 @@ _.q.stackAllElement = function () {
 
 //Smart element selection method
 _.g = function (ele, src) {
+	res = null;
 	if (src == undefined | src == null) {
 		src = document;
 	}
@@ -112,10 +114,13 @@ _.g = function (ele, src) {
 		res = src.getElementsByClassName(ele.replace("class:",""));
 	}
 	else if (ele.search("name:") !== -1) {
+		res = src.getElementsByName(ele.replace("name:",""));
 	}
 	else if (ele.search("tag:") !== -1) {
+		res = src.getElementsByTagName(ele.replace("tag:",""));
 	}
 	else if (ele.search("all:") !== -1) {
+		console.error(_("msg.notSupported"));
 	}
 	else {
 		console.error(_("msg.noModeSelector").replace("$1","_,g").replace("$2",ele);
