@@ -98,7 +98,39 @@ _.q.replaceAll = function (str, ins, res) {
 	}
 	return string;
 }
-_.q.stackAllElement = function () {
+_.q.stackAllElement = function (ele) {
+	if (ele == undefined || ele == null) {
+		console.error(_("msg.noEnoughArgs").replace("$1","_.q.stackAllElement").replace("$2",0));
+	}
+	else {
+		donum = 0;
+		rst = [];
+		while (donum < ele.length) {
+			rst[donum] = ele[donum];
+			donum ++;
+		}
+		return rst;
+	}
+}
+_.q.stackArray = function (ele) {
+	if (ele == undefined || ele == null) {
+		console.error(_("msg.noEnoughArgs").replace("$1","_.q.stackArray").replace("$2",0));
+	}
+	else {
+		donum = 0;
+		rst = [];
+		while (donum < ele.length) {
+			donuma = 0;
+			while (donuma < ele[donum].length) {
+				if (ele[donum][donuma] !== null && ele[donum][donuma] !== undefined) {
+					rst[rst.length] = ele[donum][donuma];
+				}
+				donuma ++;
+			}
+			donum ++;
+		}
+		return rst;
+	}
 }
 
 //Smart element selection method
@@ -111,16 +143,16 @@ _.g = function (ele, src) {
 		res = src.getElementById(ele.replace("id:",""));
 	}
 	else if (ele.search("class:") !== -1) {
-		res = src.getElementsByClassName(ele.replace("class:",""));
+		res = _.q.stackAllElement(src.getElementsByClassName(ele.replace("class:","")));
 	}
 	else if (ele.search("name:") !== -1) {
-		res = src.getElementsByName(ele.replace("name:",""));
+		res = _.q.stackAllElement(src.getElementsByName(ele.replace("name:","")));
 	}
 	else if (ele.search("tag:") !== -1) {
-		res = src.getElementsByTagName(ele.replace("tag:",""));
+		res = _.q.stackAllElement(src.getElementsByTagName(ele.replace("tag:","")));
 	}
 	else if (ele.search("all:") !== -1) {
-		console.error(_("msg.notSupported"));
+		res = _.q.stackArray([_.q.stackAllElement(src.getElementsByClassName(ele.replace("all:",""))) , _.q.stackAllElement(src.getElementsByName(ele.replace("name:",""))) , _.q.stackAllElement(src.getElementsByTagName(ele.replace("tag:",""))) , [src.getElementById(ele.replace("id:",""))] ]);
 	}
 	else {
 		console.error(_("msg.noModeSelector").replace("$1","_,g").replace("$2",ele));
