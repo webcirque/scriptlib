@@ -86,6 +86,17 @@ _.tab.reload = function () {
 	console.log(_("msg.tabIsReloaded").replace("$1", _("var.pathname")));
 	window.location.href = window.location.href;
 }
+_.tab.size = function () {
+	original = [document.body.style.width , document.body.style.height , document.body.style.position]
+	document.body.style.width = "100%";
+	document.body.style.height = "100%";
+	document.body.style.position = "absolute";
+	rst = [document.body.clientWidth, document.body.clientHeight];
+	document.body.style.width = original[0];
+	document.body.style.height = original[1];
+	document.body.style.position = original[2];
+	return rst;
+}
 
 //Quick method
 _.q = function () {
