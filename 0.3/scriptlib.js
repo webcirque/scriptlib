@@ -109,9 +109,12 @@ _.q.replaceAll = function (str, ins, res) {
 	}
 	return string;
 }
-_.q.stackAllElement = function (ele) {
+
+//Quick array methods
+_.array = {};
+_.array.stack = function (ele) {
 	if (ele == undefined || ele == null) {
-		console.error(_("msg.noEnoughArgs").replace("$1","_.q.stackAllElement").replace("$2",0));
+		console.error(_("msg.noEnoughArgs").replace("$1","_.array.join").replace("$2",0));
 	}
 	else {
 		donum = 0;
@@ -123,9 +126,9 @@ _.q.stackAllElement = function (ele) {
 		return rst;
 	}
 }
-_.q.stackArray = function (ele) {
+_.array.join = function (ele) {
 	if (ele == undefined || ele == null) {
-		console.error(_("msg.noEnoughArgs").replace("$1","_.q.stackArray").replace("$2",0));
+		console.error(_("msg.noEnoughArgs").replace("$1","_.array.join").replace("$2",0));
 	}
 	else {
 		donum = 0;
@@ -154,16 +157,16 @@ _.g = function (ele, src) {
 		res = src.getElementById(ele.replace("id:",""));
 	}
 	else if (ele.search("class:") !== -1) {
-		res = _.q.stackAllElement(src.getElementsByClassName(ele.replace("class:","")));
+		res = _.array.stack(src.getElementsByClassName(ele.replace("class:","")));
 	}
 	else if (ele.search("name:") !== -1) {
-		res = _.q.stackAllElement(src.getElementsByName(ele.replace("name:","")));
+		res = _.array.stack(src.getElementsByName(ele.replace("name:","")));
 	}
 	else if (ele.search("tag:") !== -1) {
-		res = _.q.stackAllElement(src.getElementsByTagName(ele.replace("tag:","")));
+		res = _.array.stack(src.getElementsByTagName(ele.replace("tag:","")));
 	}
 	else if (ele.search("all:") !== -1) {
-		res = _.q.stackArray([_.q.stackAllElement(src.getElementsByClassName(ele.replace("all:",""))) , _.q.stackAllElement(src.getElementsByName(ele.replace("name:",""))) , _.q.stackAllElement(src.getElementsByTagName(ele.replace("tag:",""))) , [src.getElementById(ele.replace("id:",""))] ]);
+		res = _.array.join([_.q.stackAllElement(src.getElementsByClassName(ele.replace("all:",""))) , _.q.stackAllElement(src.getElementsByName(ele.replace("name:",""))) , _.q.stackAllElement(src.getElementsByTagName(ele.replace("tag:",""))) , [src.getElementById(ele.replace("id:",""))] ]);
 	}
 	else {
 		console.error(_("msg.noModeSelector").replace("$1","_,g").replace("$2",ele));
