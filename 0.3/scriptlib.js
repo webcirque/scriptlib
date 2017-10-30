@@ -166,7 +166,7 @@ _.g = function (ele, src) {
 		res = _.array.stack(src.getElementsByTagName(ele.replace("tag:","")));
 	}
 	else if (ele.search("all:") !== -1) {
-		res = _.array.join([_.q.stackAllElement(src.getElementsByClassName(ele.replace("all:",""))) , _.q.stackAllElement(src.getElementsByName(ele.replace("name:",""))) , _.q.stackAllElement(src.getElementsByTagName(ele.replace("tag:",""))) , [src.getElementById(ele.replace("id:",""))] ]);
+		res = _.array.join([_.array.stack(src.getElementsByClassName(ele.replace("all:",""))) , _.array.stack(src.getElementsByName(ele.replace("name:",""))) , _.array.stack(src.getElementsByTagName(ele.replace("tag:",""))) , [src.getElementById(ele.replace("id:",""))] ]);
 	}
 	else {
 		console.error(_("msg.noModeSelector").replace("$1","_,g").replace("$2",ele));
