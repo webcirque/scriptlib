@@ -14,7 +14,7 @@ function _(name) {
 	donum = null;
 	return(res);
 }
-_.topVar = [["_ver","0.3"]];
+_.topVar = [["_ver","0.4"]];
 _.set = function (name, content) {
 	if (content !== undefined) {
 		donum = 0;
@@ -67,17 +67,6 @@ _.set("msg.scriptlibLoaded","ScriptLib is initialized in version $1 .");
 _.set("msg.noModeSelector","No mode selector in function $1($2). You should add a mode instructor.");
 _.set("msg.notSupported","This feature is not supported.");
 
-//Default variables
-if (window.location.protocol == "file:" | window.location.protocol == "ftp:" | window.location.protocol == "ftps:" | window.location.protocol == "sftp:") {
-	_.set("var.pathname",window.location.href);
-}
-else if (window.location.port == "") {
-	_.set("var.pathname",window.location.protocol + "//" + window.location.host + "/");
-}
-else {
-	_.set("var.pathname",window.location.protocol + "//" + window.location.host + ":" + window.location.port + "/");
-}
-
 //Window methods
 _.tab = function () {
 	console.error(_("msg.notAFunction").replace("$1","_.tab"));
@@ -96,6 +85,17 @@ _.tab.size = function () {
 	document.body.style.height = original[1];
 	document.body.style.position = original[2];
 	return rst;
+}
+_.tab.source = function () {
+	if (window.location.protocol == "file:") {
+		rst = window.location.href;
+	}
+	else if (window.location.port == "") {
+		rst = window.location.protocol + "//" + window.location.host + "/";
+	}
+	else {
+		rst = window.location.protocol + "//" + window.location.host + ":" + window.location.port + "/";
+	}
 }
 
 //Quick methods that has not gotten into categories.
@@ -128,7 +128,7 @@ _.array.stack = function (ele) {
 }
 _.array.combine = function (ele) {
 	if (ele == undefined || ele == null) {
-		console.error(_("msg.noEnoughArgs").replace("$1","_.array.join").replace("$2",0));
+		console.error(_("msg.noEnoughArgs").replace("$1","_.array.combine").replace("$2",0));
 	}
 	else {
 		donum = 0;
@@ -166,7 +166,7 @@ _.g = function (ele, src) {
 		res = _.array.stack(src.getElementsByTagName(ele.replace("tag:","")));
 	}
 	else if (ele.search("all:") !== -1) {
-		res = _.array.combine([_.array.stack(src.getElementsByClassName(ele.replace("all:",""))) , _.array.stack(src.getElementsByName(ele.replace("name:",""))) , _.array.stack(src.getElementsByTagName(ele.replace("tag:",""))) , [src.getElementById(ele.replace("id:",""))] ]);
+		res = _.array.combine([_.g("class:" + ele.replace("all:","")) , _.g("name:" + ele.replace("all:","")) , _.g("tag:" + ele.replace("all:","")) , [_.g("id:" + ele.replace("all:",""))] ]);
 	}
 	else {
 		console.error(_("msg.noModeSelector").replace("$1","_,g").replace("$2",ele));
