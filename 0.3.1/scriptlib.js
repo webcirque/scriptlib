@@ -98,7 +98,7 @@ _.tab.size = function () {
 	return rst;
 }
 
-//Quick method
+//Quick methods that has not gotten into categories.
 _.q = function () {
 	console.error(_("msg.notAFunction").replace("$1","_.q"));
 }
