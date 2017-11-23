@@ -66,6 +66,90 @@ _.set("msg.tooManyArgs","Argument was presented more than required in function $
 _.set("msg.scriptlibLoaded","ScriptLib is initialized in version $1 .");
 _.set("msg.noModeSelector","No mode selector in function $1($2). You should add a mode instructor.");
 _.set("msg.notSupported","This feature is not supported.");
+_.set("msg.loadedContent","Loaded content type $1 from source [$2].");
+_.set("msg.typeNotSupported","Content with type $1 isn't supported.")
+
+//Quick string methods
+_.s = function () {
+	console.error(_("msg.notAFunction").replace("$1","_.q"));
+}
+_.s.replaceAll = function (str, ins, res) {
+	string = str;
+	while (string.search(ins) !== -1) {
+		string = string.replace(ins, res);
+	}
+	return string;
+}
+
+//Console feedback formatting
+_.cf = function (text, fmt) {
+}
+
+//Ajax methods
+_.a = function () {
+	console.error(_("msg.notAFunction").replace("$1","_.a"));
+}
+
+//Algorithms
+_.c = function () {
+	console.error(_("msg.notAFunction").replace("$1","_.q"));
+}
+
+//Media methods
+_.m = function () {
+	console.error(_("msg.notAFunction").replace("$1","_.m"));
+}
+
+//Test methods
+_.is = function () {
+	console.error(_("msg.notAFunction").replace("$1","_.t"));
+}
+_.is.null = function (test) {
+	if (test == undefined || test == null) {
+		rst = true;
+	}
+	else {
+		rst = false;
+	}
+	return rst;
+}
+
+//loaders
+_.l = function (type, src) {
+	if (_.is.null(type)) {
+		type = "js";
+	}
+	if (type == "js") {
+		t = document.createElement("script");
+		t.src = src;
+		document.head,appendChild(t);
+		console.warn(_("msg.loadedContent"));
+	}
+	else if (type == "css") {
+		t = document.createElement("style");
+		t.src = src;
+		document.head,appendChild(t);
+		console.warn(_("msg.loadedContent"));
+	}
+	else {
+		console.error(_("msg.typeNotSupported").replace("$1",type));
+	}
+};
+
+//Encryptions
+_.e = function () {
+	console.error(_("msg.notAFunction").replace("$1","_.e"));
+}
+
+//Digits
+_.h = function () {
+	console.error(_("msg.notAFunction").replace("$1","_.h"));
+}
+
+//Evaluate
+_.j = function () {
+	console.error(_("msg.notAFunction").replace("$1","_.e"));
+}
 
 //Window methods
 _.tab = function () {
@@ -79,7 +163,7 @@ _.tab.size = function () {
 	original = [document.body.style.width , document.body.style.height , document.body.style.position]
 	document.body.style.width = "100%";
 	document.body.style.height = "100%";
-	document.body.style.position = "absolute";
+	document.body.style.position = "fixed";
 	rst = [document.body.clientWidth, document.body.clientHeight];
 	document.body.style.width = original[0];
 	document.body.style.height = original[1];
@@ -102,19 +186,14 @@ _.tab.source = function () {
 _.q = function () {
 	console.error(_("msg.notAFunction").replace("$1","_.q"));
 }
-_.q.replaceAll = function (str, ins, res) {
-	string = str;
-	while (string.search(ins) !== -1) {
-		string = string.replace(ins, res);
-	}
-	return string;
-}
 
 //Quick array methods
-_.array = {};
-_.array.stack = function (ele) {
+_.a = function () {
+	console.error(_("msg.notAFunction").replace("$1","_.a"));
+};
+_.a.stack = function (ele) {
 	if (ele == undefined || ele == null) {
-		console.error(_("msg.noEnoughArgs").replace("$1","_.array.join").replace("$2",0));
+		console.error(_("msg.noEnoughArgs").replace("$1","_.array.stack").replace("$2",0));
 	}
 	else {
 		donum = 0;
@@ -126,7 +205,7 @@ _.array.stack = function (ele) {
 		return rst;
 	}
 }
-_.array.combine = function (ele) {
+_.a.combine = function (ele) {
 	if (ele == undefined || ele == null) {
 		console.error(_("msg.noEnoughArgs").replace("$1","_.array.combine").replace("$2",0));
 	}
@@ -157,16 +236,16 @@ _.g = function (ele, src) {
 		res = src.getElementById(ele.replace("id:",""));
 	}
 	else if (ele.search("class:") !== -1) {
-		res = _.array.stack(src.getElementsByClassName(ele.replace("class:","")));
+		res = _.a.stack(src.getElementsByClassName(ele.replace("class:","")));
 	}
 	else if (ele.search("name:") !== -1) {
-		res = _.array.stack(src.getElementsByName(ele.replace("name:","")));
+		res = _.a.stack(src.getElementsByName(ele.replace("name:","")));
 	}
 	else if (ele.search("tag:") !== -1) {
-		res = _.array.stack(src.getElementsByTagName(ele.replace("tag:","")));
+		res = _.a.stack(src.getElementsByTagName(ele.replace("tag:","")));
 	}
 	else if (ele.search("all:") !== -1) {
-		res = _.array.combine([_.g("class:" + ele.replace("all:","")) , _.g("name:" + ele.replace("all:","")) , _.g("tag:" + ele.replace("all:","")) , [_.g("id:" + ele.replace("all:",""))] ]);
+		res = _.a.combine([_.g("class:" + ele.replace("all:",""), src) , _.g("name:" + ele.replace("all:",""), src) , _.g("tag:" + ele.replace("all:",""), src) , [_.g("id:" + ele.replace("all:",""), src)] ]);
 	}
 	else {
 		console.error(_("msg.noModeSelector").replace("$1","_,g").replace("$2",ele));
