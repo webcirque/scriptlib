@@ -65,9 +65,13 @@ _.set("msg.noSeptArgs","Argument was not seperated enough in function $1() . You
 _.set("msg.tooManyArgs","Argument was presented more than required in function $1() . You should just present $2 argument(s).");
 _.set("msg.scriptlibLoaded","ScriptLib is initialized in version $1 .");
 _.set("msg.noModeSelector","No mode selector in function $1($2). You should add a mode instructor.");
-_.set("msg.notSupported","This feature is not supported.");
+_.set("msg.notSupported","This feature is not supported, but it should be supported in the future.");
 _.set("msg.loadedContent","Loaded content type $1 from source [$2].");
 _.set("msg.typeNotSupported","Content with type $1 isn't supported.")
+_.set("msg.mwIsValid","Testing if it is a MediaWiki site...");
+_.set("msg.mwIsNotValid","MediaWiki is not included in this site.");
+_.set("msg.mwIsConstr","Supporting MediaWiki...");
+_.set("msg.mwIsBuilt","Loaded MediaWiki support.");
 
 //Quick string methods
 _.s = function () {
@@ -251,6 +255,26 @@ _.g = function (ele, src) {
 		console.error(_("msg.noModeSelector").replace("$1","_,g").replace("$2",ele));
 	}
 	return res;
+}
+
+//MediaWiki Support
+console.log(_("msg.mwIsValid"));
+_.mw = null;
+try {
+	_.mw = mw;
+}
+catch (err) {
+	if (!(_.is.null(err))) {
+		console.warn(_("msg.mwIsNotValid"));
+	}
+}
+if (!(_.is.null(_.mw))) {
+	console.log(_("msg.mwIsConstr"));
+	_.mw = {};
+	_.mw.getNameSpace = function () {
+		console.log(_("notSupported"));
+	}
+	console.log(_("msg.mwIsBuilt"));
 }
 
 //ScriptLib is loaded
