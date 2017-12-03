@@ -70,8 +70,8 @@ _.set("msg.loadedContent","Loaded content type $1 from source [$2].");
 _.set("msg.typeNotSupported","Content with type $1 isn't supported.")
 _.set("msg.mwIsValid","Testing if it is a MediaWiki site...");
 _.set("msg.mwIsNotValid","MediaWiki is not included in this site.");
-_.set("msg.mwIsConstr","Supporting MediaWiki...");
-_.set("msg.mwIsBuilt","Loaded MediaWiki support.");
+_.set("msg.mwIsConstr","Hooking with MediaWiki...");
+_.set("msg.mwIsBuilt","Hooked with MediaWiki.");
 
 //Quick string methods
 _.s = function () {
