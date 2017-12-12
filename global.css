@@ -15,10 +15,11 @@ a:hover, a:active {
 }
 body {
   font-family:"微软雅黑","Verdana","Arial","MS Gothic","黑体";
+  margin:0;
 }
 [container] {
   position:relative;
-  left:50%;
+  left:0;
   width:100%;
   max-width:800px;
   min-height:100%;
