@@ -66,50 +66,78 @@ _.set("msg.tooManyArgs","Argument was presented more than required in function $
 _.set("msg.scriptlibLoaded","ScriptLib is initialized in version $1 .");
 _.set("msg.noModeSelector","No mode selector in function $1($2). You should add a mode instructor.");
 _.set("msg.notSupported","This feature is not supported, but it should be supported in the future.");
+_.set("msg.notSupportedInBrowser","This feature is not supported in your current browser. Please update your browser.");
 _.set("msg.loadedContent","Loaded content type $1 from source [$2].");
 _.set("msg.typeNotSupported","Content with type $1 isn't supported.")
 _.set("msg.mwIsValid","Testing if it is a MediaWiki site...");
 _.set("msg.mwIsNotValid","MediaWiki is not included in this site.");
 _.set("msg.mwIsConstr","Hooking with MediaWiki...");
 _.set("msg.mwIsBuilt","Hooked with MediaWiki.");
+_.set("msg.evalFailed","Cannot evaluate this string since it cannot be parsed.");
+_.set("msg.notRightType","Argument list is mixed with not the right type of value in argument $1. You should use type [$2].");
+_.set("msg.sameArgs","There are 2 or more arguments assigned with the same value which could cause failure.");
 
 //List of HTML Tags
-_.set("htmlTag","a,abbr,acronym,address,applet,area,article,aside,audio,b,base,basefont,bdi,bdo,big,blockquote,body,br,button,canvas,caption,center,cite,code,col,colgroup,command,datalist,dd,del,details,dfn,dialog,dir,div,dl,dt,em,embed,fieldset,figcaption,figure,font,footer,form,frame,frameset,h1> - <h6,head,header,hr,html,i,iframe,img,input,ins,kbd,keygen,label,legend,li,link,main,map,mark,menu,menuitem,meta,meter,nav,noframes,noscript,object,ol,optgroup,option,output,p,param,pre,progress,q,rp,rt,ruby,s,samp,script,section,select,small,source,span,strike,strong,style,sub,summary,sup,table,tbody,td,textarea,tfoot,th,thead,time,title,tr,track,tt,u,ul,var,video,wbr".split(","));
+_.set("htmlTag","a,abbr,acronym,address,applet,area,article,aside,audio,b,base,basefont,bdi,bdo,big,blockquote,body,br,button,canvas,caption,center,cite,code,col,colgroup,command,datalist,dd,del,details,dfn,dialog,dir,div,dl,dt,em,embed,fieldset,figcaption,figure,font,footer,form,frame,frameset,h1> - <h6,head,header,hr,html,i,iframe,img,input,ins,kbd,keygen,label,legend,li,link,main,map,mark,menu,menuitem,meta,meter,nav,noframes,noscript,object,ol,optgroup,option,output,p,param,pre,progress,q,rp,rt,ruby,s,samp,script,section,select,small,source,span,strike,strong,style,sub,summary,sup,table,tbody,td,textarea,tfoot,th,thead,time,title,tr,track,tt,u,ul,var,video,wbr,id,class,tag,name,sall,all".split(","));
 
 //Quick string methods
 _.s = function () {
 	console.error(_("msg.notAFunction").replace("$1","_.q"));
 }
-_.s.replaceAll = function (str, ins, res) {
+_.s.rplAll = function (str, ins, res) {
 	string = str;
-	while (string.search(ins) !== -1) {
-		string = string.replace(ins, res);
+	if (ins !== res) {
+		while (str.search(ins) !== -1) {
+			string = string.replace(ins, res);
+		}
+		return string;
 	}
-	return string;
+	else {
+		return null;
+		console.error(_("msg.sameArgs"));
+	}
 }
 
 //Console feedback formatting
-_.cf = function (text, fmt) {
+_.cf = function (type, text, fmt) {
+	donum = 0;
+	rst = text;
+	while (donum < fmt.length) {
+		rst = rst.replace("$" + (fmt.length - donum).toString(), fmt[fmt.length - 1 - donum]);
+		// console.log(fmt.length - donum);
+		// console.log(fmt[fmt.length - 1 - donum]);
+		donum ++;
+	}
+	if (type == 1) {
+		console.warn(rst);
+	}
+	else if (type == 2) {
+		console.error(rst);
+	}
+	else {
+		console.log(rst);
+	}
+	return rst;
 }
 
 //Ajax methods
 _.a = function () {
-	console.error(_("msg.notAFunction").replace("$1","_.a"));
+	_.cf(2, _("msg.notAFunction"), ["_.a"]);
 }
 
 //Algorithms
 _.c = function () {
-	console.error(_("msg.notAFunction").replace("$1","_.q"));
+	_.cf(2, _("msg.notAFunction"), ["_.c"]);
 }
 
 //Media methods
 _.m = function () {
-	console.error(_("msg.notAFunction").replace("$1","_.m"));
+	_.cf(2, _("msg.notAFunction"), ["_.m"]);
 }
 
 //Test methods
 _.is = function () {
-	console.error(_("msg.notAFunction").replace("$1","_.t"));
+	_.cf(2, _("msg.notAFunction"), ["_.is"]);
 }
 _.is.null = function (test) {
 	if (test == undefined || test == null) {
@@ -145,25 +173,46 @@ _.l = function (type, src) {
 
 //Encryptions
 _.e = function () {
-	console.error(_("msg.notAFunction").replace("$1","_.e"));
+	_.cf(2, _("msg.notAFunction"), ["_.e"]);
 }
 
 //Digits
 _.h = function () {
-	console.error(_("msg.notAFunction").replace("$1","_.h"));
+	_.cf(2, _("msg.notAFunction"), ["_.h"]);
 }
 
 //Evaluate
-_.j = function () {
-	console.error(_("msg.notAFunction").replace("$1","_.e"));
+_.j = function (txt) {
+	stat = 0;
+	try {
+		eval();
+	}
+	catch (err) {
+		stat = 1;
+		console.error(_("msg.notSupportedInBrowser"));
+	}
+	if (stat == 0) {
+		try {
+			rst = eval("(" + txt + ")");
+		}
+		catch (err) {
+			stat = 2;
+			console.error(_("msg.evalFailed"));
+			console.log(err.stack);
+		}
+	}
+	if (stat == 0) {
+		return rst;
+	}
+	else {
+		return null;
+	}
 }
 
 //Window methods
-_.tab = function () {
-	console.error(_("msg.notAFunction").replace("$1","_.tab"));
-}
+_.tab = window;
 _.tab.reload = function () {
-	console.log(_("msg.tabIsReloaded").replace("$1", _("var.pathname")));
+	_.cf(0, _("msg.tabIsReloaded"), [_.tab.source()]);
 	window.location.href = window.location.href;
 }
 _.tab.size = function () {
@@ -186,6 +235,36 @@ _.tab.source = function () {
 	}
 	else {
 		rst = window.location.protocol + "//" + window.location.host + ":" + window.location.port + "/";
+	}
+}
+_.tab.fullsc = function (element) {
+	if (!(_.is.null(element))) {
+		if (!(_.is.null(element.nodeName))) {
+			if (element.requestFullScreen) {
+				element.requestFullScreen();
+			}
+			else if (element.webkitRequestFullScreen) {
+				element.webkitRequestFullScreen();
+			}
+			else if (element.mozRequestFullScreen) {
+				element.mozRequestFullScreen();
+			}
+			else {
+				console.error(_("msg.notSupportedInBrowser"));
+			}
+		}
+		
+	}
+	else {
+		if (document.exitFullscreen) {
+			document.exitFullscreen();
+		}
+		else if (document.mozCancelFullScreen) {
+			document.mozCancelFullScreen();
+		}
+		else if (document.webkitExitFullscreen) {
+			document.webkitExitFullscreen();
+		}
 	}
 }
 
@@ -239,20 +318,22 @@ _.g = function (ele, src) {
 	if (src == undefined | src == null) {
 		src = document;
 	}
-	if (ele.search("id:") !== -1) {
-		res = src.getElementById(ele.replace("id:",""));
-	}
-	else if (ele.search("class:") !== -1) {
-		res = _.a.stack(src.getElementsByClassName(ele.replace("class:","")));
-	}
-	else if (ele.search("name:") !== -1) {
-		res = _.a.stack(src.getElementsByName(ele.replace("name:","")));
-	}
-	else if (ele.search("tag:") !== -1) {
-		res = _.a.stack(src.getElementsByTagName(ele.replace("tag:","")));
-	}
-	else if (ele.search("all:") !== -1) {
-		res = _.a.combine([_.g("class:" + ele.replace("all:",""), src) , _.g("name:" + ele.replace("all:",""), src) , _.g("tag:" + ele.replace("all:",""), src) , [_.g("id:" + ele.replace("all:",""), src)] ]);
+	if (ele.search(":") !== -1) {
+		if (ele.search("id:") !== -1) {
+			res = src.getElementById(ele.replace("id:",""));
+		}
+		else if (ele.search("class:") !== -1) {
+			res = _.a.stack(src.getElementsByClassName(ele.replace("class:","")));
+		}
+		else if (ele.search("name:") !== -1) {
+			res = _.a.stack(src.getElementsByName(ele.replace("name:","")));
+		}
+		else if (ele.search("tag:") !== -1) {
+			res = _.a.stack(src.getElementsByTagName(ele.replace("tag:","")));
+		}
+		else if (ele.search("sall:") !== -1) {
+			res = _.a.combine([_.g("class:" + ele.replace("sall:",""), src) , _.g("name:" + ele.replace("sall:",""), src) , _.g("tag:" + ele.replace("sall:",""), src) , [_.g("id:" + ele.replace("sall:",""), src)] ]);
+		}
 	}
 	else {
 		console.error(_("msg.noModeSelector").replace("$1","_,g").replace("$2",ele));
