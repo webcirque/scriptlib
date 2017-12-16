@@ -157,13 +157,13 @@ _.l = function (type, src) {
 	if (type == "js") {
 		t = document.createElement("script");
 		t.src = src;
-		document.head,appendChild(t);
+		document.head.appendChild(t);
 		console.warn(_("msg.loadedContent"));
 	}
 	else if (type == "css") {
 		t = document.createElement("style");
 		t.src = src;
-		document.head,appendChild(t);
+		document.head.appendChild(t);
 		console.warn(_("msg.loadedContent"));
 	}
 	else {
