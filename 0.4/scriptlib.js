@@ -363,3 +363,9 @@ if (!(_.is.null(_.mw))) {
 
 //ScriptLib is loaded
 console.log(_("msg.scriptlibLoaded").replace("$1",_("_ver")));
+
+try {
+	_main();
+}
+catch (err) {
+}
