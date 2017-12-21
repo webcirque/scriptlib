@@ -121,8 +121,35 @@ _.cf = function (type, text, fmt) {
 }
 
 //Ajax methods
-_.a = function () {
-	_.cf(2, _("msg.notAFunction"), ["_.a"]);
+_.a = function (type, src) {
+	if (window.XMLHttpRequest) {
+		ele = new XMLHttpRequest();
+	}
+	else {// code for IE6, IE5
+		ele = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	if (type == 0) {
+		xmlhttp.open("GET", src, false);
+		xmlhttp.send();
+		return ele;
+	}
+	else if (type == 1) {
+		xmlhttp.open("GET", src, true);
+		xmlhttp.send();
+		return ele;
+	}
+	else if (type == 2) {
+		xmlhttp.open("POST", src, false);
+		xmlhttp.send();
+		return ele;
+	}
+	else if (type == 3) {
+		xmlhttp.open("POST", src, true);
+		xmlhttp.send();
+		return ele;
+	}
+	else {
+	}
 }
 
 //Algorithms
