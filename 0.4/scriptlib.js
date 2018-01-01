@@ -392,7 +392,8 @@ if (!(_.is.null(_.mw))) {
 console.log(_("msg.scriptlibLoaded").replace("$1",_("_ver")));
 
 try {
-	_main();
+	document.onload = _main;
 }
 catch (err) {
+	console.warn("_main is not defined.");
 }
