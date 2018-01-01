@@ -87,7 +87,7 @@ _.s = function () {
 _.s.rplAll = function (str, ins, res) {
 	string = str;
 	if (ins !== res) {
-		while (str.search(ins) !== -1) {
+		while (string.search(ins) !== -1) {
 			string = string.replace(ins, res);
 		}
 		return string;
