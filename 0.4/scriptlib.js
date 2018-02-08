@@ -264,7 +264,7 @@ _.tab.source = function () {
 		rst = window.location.protocol + "//" + window.location.host + ":" + window.location.port + "/";
 	}
 }
-_.tab.fullsc = function (element) {
+_.tab.fsc = function (element) {
 	if (!(_.is.null(element))) {
 		if (!(_.is.null(element.nodeName))) {
 			if (element.requestFullScreen) {
@@ -282,7 +282,7 @@ _.tab.fullsc = function (element) {
 		}
 		
 	}
-	else {
+	else if (_.is.null(element)) {
 		if (document.exitFullscreen) {
 			document.exitFullscreen();
 		}
@@ -293,6 +293,55 @@ _.tab.fullsc = function (element) {
 			document.webkitExitFullscreen();
 		}
 	}
+	else {
+		if (element.requestFullScreen) {
+			element.requestFullScreen(document.body);
+		}
+		else if (element.webkitRequestFullScreen) {
+			element.webkitRequestFullScreen(document.body);
+		}
+		else if (element.mozRequestFullScreen) {
+			element.mozRequestFullScreen(document.body);
+		}
+		else {
+			console.error(_("msg.notSupportedInBrowser"));
+		}
+	}
+}
+function PageAttributes() {}
+_.tab.parse = function (type, text) {
+	ori = window.location.search.replace("?","");
+	if (type == 0 || type == undefined) {
+		sep = "&=";
+	}
+	else if (type == 1) {
+		sep = ";:";
+	}
+	else if (type == 2) {
+		sep = ",:";
+	}
+	if (!(text)) {
+		text = decodeURI(ori);
+	}
+	arr = text.split(sep[0]);
+	donum = 0;
+	arr2 = [];
+	jsonT = "{\n";
+	while (donum < arr.length) {
+		arr2[arr2.length] = arr[donum].split(sep[1]);
+		jsonT += "\t\"" + arr2[arr2.length-1][0] + "\": \"" + arr2[arr2.length-1][1] + "\"";
+		if (donum == arr.length - 1) {
+			jsonT += "\n}";
+		} else {
+			jsonT += ",\n";
+		}
+		donum ++;
+	}
+	console.log(arr2);
+	jsonO = _.j(jsonT);
+	jsonO.__proto__.constructor = PageAttributes;
+	return jsonO;
+	arr = arr2 = sep = ori = donum = undefined;
 }
 
 //Quick methods that has not gotten into categories.
