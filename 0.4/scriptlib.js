@@ -308,9 +308,6 @@ _.tab.fsc = function (element) {
 		}
 	}
 }
-function PageAttributes(jsonO) {
-	this = jsonO;
-}
 _.tab.parse = function (type, text) {
 	ori = window.location.search.replace("?","");
 	if (type == 0 || type == undefined) {
@@ -341,7 +338,7 @@ _.tab.parse = function (type, text) {
 	}
 	console.log(arr2);
 	jsonO = _.j(jsonT);
-	return new PageAttributes(jsonO);
+	return jsonO;
 	arr = arr2 = sep = ori = donum = undefined;
 }
 
