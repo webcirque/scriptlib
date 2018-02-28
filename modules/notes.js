@@ -1,0 +1,1 @@
+notes=_.g("class:note");for(let donum=0;donum<notes.length;donum++){list=notes[donum].innerHTML.split("\n");notes[donum].innerHTML="";for(let dinum=0;dinum<list.length;dinum++){notes[donum].innerHTML+="<div>"+list[dinum]+"</div>";}}console.log("Module ELSL Notes loaded.");
