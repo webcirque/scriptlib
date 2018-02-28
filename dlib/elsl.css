@@ -358,4 +358,102 @@ button:active.flat.default, button:active.flat.gray, button:active.flat.black {
     box-shadow: inset 0px 0px 2px #000
 }
 
+/* Notes */
+.note {
+    border-left: 2px solid;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    padding: 0;
+    word-wrap: break-word;
+    color: rgba(0, 0, 0, 0.7);
+}
+.note div {
+    padding: 1px 6px 1px;
+}
+.note div::selection {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.note div:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.note.default {
+    border-left-color: #999;
+    background-color: #eee;
+    color: #444;
+}
+.note.default::selection {
+    background-color: #111;
+}
+.note.red {
+    border-left-color: #b00;
+    background-color: #f44;
+    color: #700;
+}
+.note.orange {
+    border-left-color: #d60;
+    background-color: #fa1;
+    color: #920;
+}
+.note.yellow {:;
+    border-left-color: #ba0;
+    background-color: #fe4;
+    color: #760;
+}
+.note.green {
+    border-left-color: #0b0;
+    background-color: #3e3;
+    color: #070;
+}
+.note.cyan {
+    border-left-color: #0a7;
+    background-color: #4eb;
+    color: #063;
+}
+.note.lblue {
+    border-left-color: #0bc;
+    background-color: #4ff;
+    color: #078;
+}
+.note.cblue {
+    border-left-color: #08e;
+    background-color: #4cf;    
+    color: #04a;
+}
+.note.blue {
+    border-left-color: #13e;
+    background-color: #68f;
+    color: #00a;
+}
+.note.purple {
+    border-left-color: #51c;
+    background-color: #a6f;
+    color: #108;
+}
+.note.brown {
+    border-left-color: #633;
+    background-color: #b88;
+    color: #200;
+}
+.note.pink {
+    border-color: #e79;
+    background-color: #fbd;
+}
+.note.magenta {
+    border-color: #80b;
+    background-color: #d5f;
+}
+.note.gray {
+    border-color: #555;
+    background-color: #aaa;
+}
+.note.gray div:hover {
+    color: #eee;
+}
+.note.black {
+    border-color: #111;
+    background-color: #555;
+    color: #ddd;
+}
+
 /* Pipe Buttons */
