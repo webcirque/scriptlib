@@ -1,5 +1,10 @@
 button {
     font-size: 13px;
+    outline: none;
+}
+
+textarea, input, div, p, iframe, [hidefocus] {
+    outline: none;
 }
 
 button.midsmall {
