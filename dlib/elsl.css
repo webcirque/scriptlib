@@ -363,12 +363,14 @@ button:active.flat.default, button:active.flat.gray, button:active.flat.black {
     border-left: 2px solid;
     margin-top: 4px;
     margin-bottom: 4px;
-    padding: 0;
+    padding: 4px 0;
     word-wrap: break-word;
     color: rgba(0, 0, 0, 0.7);
+    line-height: 18px;
 }
 .note div {
     padding: 1px 6px 1px;
+    margin: 1px 0;
 }
 .note div::selection {
     color: #fff;
