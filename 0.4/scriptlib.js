@@ -63,7 +63,7 @@ _.set("msg.tabIsReloaded","Current tab [$1] has been refreshed.");
 _.set("msg.noEnoughArgs","Argument was not presented enough in function $1() . You should present at least $2 argument(s).");
 _.set("msg.noSeptArgs","Argument was not seperated enough in function $1() . You should present at least $2 argument(s) with character [$3].");
 _.set("msg.tooManyArgs","Argument was presented more than required in function $1() . You should just present $2 argument(s).");
-_.set("msg.scriptlibLoaded","ScriptLib is initialized in version $1 .");
+_.set("msg.scriptlibLoaded","ELSL Core is initialized in version $1 .");
 _.set("msg.noModeSelector","No mode selector in function $1($2). You should add a mode instructor.");
 _.set("msg.notSupported","This feature is not supported, but it should be supported in the future.");
 _.set("msg.notSupportedInBrowser","This feature is not supported in your current browser. Please update your browser.");
@@ -434,6 +434,9 @@ if (!(_.is.null(_.mw))) {
 	}
 	console.log(_("msg.mwIsBuilt"));
 }
+
+//Load modules
+_.l("js","https://mwashfds.github.io/ScriptLib/module/notes.js");
 
 //ScriptLib is loaded
 console.log(_("msg.scriptlibLoaded").replace("$1",_("_ver")));
