@@ -16,3 +16,8 @@ else {
 if (para.src !== null) {
  document.head.appendChild(para);
 }
+css = document.createElement("link");
+css.rel = "stylesheet";
+css.type = "text/css";
+css.href = "https://mwashfds.github.io/ScriptLib/dlib/elsl.css";
+document.head.appendChild(css);
