@@ -24,7 +24,7 @@ textarea, input, [hidefocus], .hidefocus, [nofocus], .nofocus {
 
 /* Force to hide elements */
 .hidden, [hidden] {
-    color: rgba(0, 0, 0) !important;
+    color: rgba(0, 0, 0, 0) !important;
     opacity: 0 !important;
     display: none !important;
     visibility: hidden !important;
@@ -32,7 +32,7 @@ textarea, input, [hidefocus], .hidefocus, [nofocus], .nofocus {
     height: 0 !important;
     margin: 0 !important;
     position: absolute !important;
-    background-color: rgba(0, 0, 0) !important;
+    background-color: rgba(0, 0, 0, 0) !important;
     max-height: 0 !important;
     max-width: 0 !important;
 }
