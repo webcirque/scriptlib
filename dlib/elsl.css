@@ -367,10 +367,27 @@ button:active.flat.default, button:active.flat.gray, button:active.flat.black {
     word-wrap: break-word;
     color: rgba(0, 0, 0, 0.7);
     line-height: 18px;
+    font-size: 14px;
 }
 .note div {
     padding: 1px 6px 1px;
     margin: 1px 0;
+    word-wrap: break-word;
+}
+.note div.t3 {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+}
+.note div.t2 {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+}
+.note div.t1 {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
 }
 .note div::selection {
     color: #fff;
