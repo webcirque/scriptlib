@@ -436,7 +436,7 @@ if (!(_.is.null(_.mw))) {
 }
 
 //Load modules
-_.l("js","https://mwashfds.github.io/ScriptLib/module/notes.js");
+_.l("js","https://scriptlib.pwcq.ml/module/notes.js");
 
 //ScriptLib is loaded
 console.log(_("msg.scriptlibLoaded").replace("$1",_("_ver")));
